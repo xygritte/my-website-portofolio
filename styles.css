@@ -5,6 +5,14 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+p::first-letter {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: tomato;
+    float: left;
+    margin-right: 8px;
+}
+
 html {
     scroll-behavior: smooth;
   }
@@ -111,6 +119,9 @@ nav{
 .hero p{
     font-size: 1rem;
     margin-bottom: 1.5rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 1rem;
+    border-radius: 20px ;
 }
 .hero-text{
     max-width: 500px;
@@ -192,22 +203,71 @@ nav{
 }
 
 @media screen and (max-width: 768px) {
-    .hero, .hero1 {
+    header {
         flex-direction: column;
+        align-items: center;
         text-align: center;
-        padding: 2rem;
+        padding: 10px;
     }
 
-    .hero-img, .hero1-img {
-        width: 80%;
+    .cta-btn{
+        text-align: center;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+        padding-top: 10px;
+    }
+
+    .nav-links li {
+        display: none;
+    }
+
+    .nav-links li a {
+        display: block;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .hero h1, .hero1 h1{
+        text-align: center;
+    }
+
+    .hero,
+    .hero1 {
+        flex-direction: column;
+        text-align: left;
+        padding: 2rem 1rem;
+    }
+
+    .hero1{
+        padding: 10rem 1rem;
+    }
+
+.hero1:hover{
+    padding: 10rem 1rem;
+}
+
+    .hero-img,
+    .hero1-img {
+        width: 100%;
         max-width: 300px;
+        margin-bottom: 15px;
+    }
+
+    .hero-text,
+    .hero1-text {
+        max-width: 90%;
+    }
+
+    .hero h1,
+    .hero1 h1 {
+        font-size: 2rem;
         margin-bottom: 1rem;
     }
-
-    .hero-text, .hero1-text {
-        max-width: 100%;
-    }
 }
+
 
 
 footer{
@@ -217,7 +277,7 @@ footer{
     
 }
 
-footer p a{
+footer a{
     text-decoration: none;
     color: black;
     background-color: white;
@@ -225,7 +285,7 @@ footer p a{
     border-radius: 20px;
     transition: 0.5s ease-in-out;
 }
-footer p a:hover{
+footer a:hover{
     text-decoration: none;
     color: black;
     background-color: white;
