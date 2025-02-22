@@ -99,6 +99,7 @@ nav{
     color: white;
     transition: 0.5s ease-in-out;
     z-index: 1;
+    gap: 20px;
 }
 
 .hero h1{
@@ -158,6 +159,7 @@ nav{
     transition: 0.5s ease-in-out;
     z-index: 1;
     background-color: black;
+    gap: 20px;
 }
 
 .hero1:hover{
@@ -188,6 +190,25 @@ nav{
     border-radius: 10px;
     box-shadow: 0 12px 24px black;
 }
+
+@media screen and (max-width: 768px) {
+    .hero, .hero1 {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem;
+    }
+
+    .hero-img, .hero1-img {
+        width: 80%;
+        max-width: 300px;
+        margin-bottom: 1rem;
+    }
+
+    .hero-text, .hero1-text {
+        max-width: 100%;
+    }
+}
+
 
 footer{
     background-color: rgb(0, 0, 0);
