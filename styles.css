@@ -15,6 +15,7 @@ p::first-letter {
 
 .portfoliopict{
     width: 15%;
+    transition: 0.5s ease-in-out;
 }
 
 html {
@@ -26,23 +27,15 @@ body {
 }
 
 header{
-    background-color: rgb(0, 0, 0, 0.7);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
     color: white;
-    padding: 20px ;
+    padding: 30px ;
     font-size: larger;
 }
 
-.profpic{
-    width: 10%;
-    max-width: 400px;
-    height: auto;
-    border-radius: 1000px;
-    transition: 0.5s ease-in-out;
-}
 
-.profpic:hover{
-    transform: scale(1.1);
-    box-shadow: 0px 0px 20px tomato;
+.portfoliopict:hover{
+    transform: scale(1.3);
 }
 
 nav{
@@ -206,7 +199,18 @@ nav{
         flex-direction: column;
         align-items: center;
         text-align: center;
-        padding: 10px;
+    }
+
+    nav{
+        flex-direction: column;
+    }   
+
+    .portfoliopict{
+        width: 50%;
+    }
+
+    nav .cta-btn{
+        display: none;
     }
 
     .cta-btn{
@@ -242,8 +246,8 @@ nav{
     .hero{
         flex-direction: column;
         text-align: left;
-        padding: 10rem 1rem;
         text-align: center;
+        padding: 10rem 1rem;
     }
 
     .hero p{
