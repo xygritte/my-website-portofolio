@@ -13,6 +13,14 @@ p::first-letter {
     margin-right: 8px;
 }
 
+p{
+    letter-spacing: 2px;
+}
+
+h1{
+    letter-spacing: 10px;
+}
+
 .portfoliopict{
     width: 15%;
     transition: 0.5s ease-in-out;
