@@ -22,7 +22,7 @@ body {
 }
 
 header{
-    background-color: black;
+    background-color: rgb(0, 0, 0, 0.7);
     color: white;
     padding: 10px ;
     font-size: larger;
@@ -159,6 +159,7 @@ nav{
     object-fit: cover;
     background-size: contain;
     transition: transform 0.5s ease-in-out;
+    
 }
 
 .hero1 {
@@ -169,7 +170,7 @@ nav{
     color: white;
     transition: 0.5s ease-in-out;
     z-index: 1;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.7);
     gap: 20px;
 }
 
@@ -278,7 +279,7 @@ nav{
 }
 
 footer{
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(0, 0, 0, 0.9);
     padding: 2rem;
     text-align: center;
     
