@@ -141,13 +141,7 @@ nav{
 .hero:hover{
     padding: 5rem;
 }
-.hero:hover .background-video{
-    transform: scale(1.3);
-}
 
-
-.video-background{
-}
 
 .background-video{
     position: fixed;
