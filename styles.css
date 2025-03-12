@@ -41,11 +41,6 @@ header{
     font-size: larger;
 }
 
-
-.portfoliopict:hover{
-    transform: scale(1.3);
-}
-
 nav{
     display: flex;
     justify-content: space-between;
@@ -115,6 +110,11 @@ nav{
     gap: 20px;
 }
 
+.hero.active{
+    padding: 5rem;
+}
+
+
 .hero h1{
     font-size: 2.5rem;
     margin-bottom: 1.5remm;
@@ -143,9 +143,6 @@ nav{
     box-shadow: 0 12px 24px black;
 }
 
-.hero:hover{
-    padding: 5rem;
-}
 
 
 .background-video{
@@ -173,7 +170,7 @@ nav{
     gap: 20px;
 }
 
-.hero1:hover{
+.hero1.active{
     padding: 5rem;
 }
 
@@ -201,6 +198,51 @@ nav{
     border-radius: 10px;
     box-shadow: 0 12px 24px black;
 }
+
+.hero2 {
+    display: flex;
+    justify-content:  space-between;
+    align-items: center;
+    padding: 3rem 10rem;
+    color: white;
+    transition: 0.5s ease-in-out;
+    z-index: 1;
+    gap: 20px;
+}
+
+.hero2.active{
+    padding: 5rem;
+}
+
+.hero2 h1{
+    font-size: 2.5rem;
+    margin-bottom: 1.5remm;
+    
+}
+
+.hero2 p{
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 1rem;
+    border-radius: 20px ;
+}
+.hero2-text{
+    max-width: 500px;
+    z-index: 1;
+    position: relative;
+    color: white;
+}
+
+.hero2-img{
+    width: 40%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 12px 24px black;
+}
+
+
 
 @media screen and (max-width: 768px) {
     header {
@@ -241,51 +283,44 @@ nav{
         width: 100%;
     }
 
-    .hero h1, .hero1 h1{
+    .hero h1, .hero1 h1, .hero2 h1 {
         text-align: center;
         font-size: 2rem;
         margin-bottom: 1rem;
     }
-
+    
     .hero1 h1{
         color: tomato;
     }
-
-    .hero{
+    
+    .hero, .hero1, .hero2 {
         flex-direction: column;
         text-align: left;
         text-align: center;
         padding: 10rem 1rem;
     }
-
-    .hero p{
-        text-align: left;
-    }
-
-
-    .hero1 {
-        flex-direction: column;
-        text-align: left;
-        padding: 10rem 1rem;
-    }
-
-    .hero:hover, .hero1:hover{
-        padding: 10rem 1rem;
-    }
-
     
-
-    .hero-img,
-    .hero1-img {
+    .hero p, .hero1 p, .hero2 p {
+        text-align: left;
+    }
+    
+    .hero2 {
+        flex-direction: column;
+        text-align: center;
+        padding: 10rem 1rem;
+    }
+    
+   
+    .hero-img, .hero1-img, .hero2-img {
         width: 100%;
         max-width: 300px;
         margin-bottom: 15px;
     }
-
-    .hero-text,
-    .hero1-text {
+    
+    .hero-text, .hero1-text, .hero2-text {
         max-width: 90%;
     }
+    
 }
 
 footer{
@@ -299,7 +334,7 @@ footer a{
     text-decoration: none;
     color: black;
     background-color: white;
-    padding: 0.5rem;
+    padding: 0.5rem 1rem;
     border-radius: 20px;
     transition: 0.5s ease-in-out;
 }
