@@ -1,20 +1,32 @@
-const hero = document.querySelector('.hero');
-const hero1 = document.querySelector('.hero1');
-const hero2 = document.querySelector('.hero2');
+const helloWorldSection = document.getElementById('hello-world');
+const heroes = document.querySelectorAll('.hero, .hero1, .hero2');
+const navLinks = document.querySelectorAll('.nav-links a');
 
-hero.addEventListener('click', function () {
-    hero.classList.toggle('active');
-});
+// Navigation click event
+navLinks.forEach(link => {
+    link.addEventListener('mouseover', (event) => {
+        event.preventDefault(); // Prevent default anchor behavior
+        const targetId = event.target.getAttribute('href').substring(1); // Get the target section ID
+        const targetSection = document.getElementById(targetId);
 
-hero1.addEventListener('click', function () {
-    hero1.classList.toggle('active');
-});
+        // Hide all sections
+        helloWorldSection.style.display = 'none';
+        heroes.forEach(hero => {
+            hero.style.display = 'none';
+        });
 
-hero2.addEventListener('click', function () {
-    hero2.classList.toggle('active');
+        // Show the target section
+        if (targetSection) {
+            targetSection.style.display = 'flex'; // Show the target section
+        }
+    });
 });
 
 function copyText() {
-    navigator.clipboard.writeText("ahfura70@gmail.com");
-    alert("Teks telah disalin!");
+    navigator.clipboard.writeText("ahfura70@gmail.com").then(() => {
+        alert("Text has been copied!");
+    }).catch(err => {
+        console.error('Failed to copy: ', err);
+        alert("Failed to copy text.");
+    });
 }
