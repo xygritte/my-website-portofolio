@@ -3,73 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>main-page</title>
+    <meta name="description" content="Professional Logo Designer Portfolio">
+    <title>Ahfura - Professional Logo Designer</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <!-- <h3>PORTOFOLIO</h3> -->
-<img href="#hello-world" src="1.png" class="portfoliopict" alt="Portfolio Picture">
+    <header role="banner">
+        <nav role="navigation" aria-label="Main navigation">
+            <a href="#hello-world" class="logo-link">
+                <img src="1.png" class="portfoliopict" alt="Portfolio Logo" width="150" height="60">
+            </a>
 
             <ul class="nav-links">
                 <li><a href="#about" id="nav-about">ABOUT</a></li>
                 <li><a href="#skill" id="nav-skill">SKILLS</a></li>
                 <li><a href="#review" id="nav-review">REVIEW</a></li>
             </ul>
-            <a href="https://www.fiverr.com/s/R7d1Nk2" class="cta-btn" target="_blank" rel="noopener noreferrer">see me on Fiverr</a>
+            <a href="https://www.fiverr.com/s/R7d1Nk2" class="cta-btn hide-mobile" target="_blank" rel="noopener noreferrer">
+                See me on Fiverr
+            </a>
         </nav>
-        <img src="Untitled design (5).png" alt="" class="background-img">
+        <img src="Untitled design (5).png" alt="Abstract background design" class="background-img" loading="lazy">
     </header>
 
-    <!-- ======================= -->
+    <main role="main">
+        <section id="hello-world" class="welcome-section">
+             <img src="1.png" alt="Portfolio Logo" class="welcome-logo" width="400" height="150" loading="lazy">
+        </section>
 
-<div id="hello-world">
-    <h1>HELLO WORLD</h1>
-</div>
+        <section id="about" class="hero" style="display: none;" aria-labelledby="about-heading">
+            <img class="hero-img" src="p.png" alt="Ahfura - Professional Logo Designer" width="400" height="400" loading="lazy">
+            <div class="hero-text">
+                <img src="Untitled design (3).png" alt="Decorative underline" class="underline-img" width="200" height="80" loading="lazy">
+                <p>A skilled logo designer passionate about turning ideas into visually stunning logos that make brands stand out. Whether you need a unique logo design from scratch or want to enhance your existing 2D logo into an eye-catching 3D masterpiece, I've got you covered!</p>
+                <p>My designs meet professional standards. With a friendly approach and fast communication, I make sure to keep you updated every step of the way.</p>
+                <p>Let's collaborate to bring your vision to life! Feel free to message me with your project details or place an order—I'm here to help your brand shine!</p>
+            </div>  
+        </section>
 
-<section id="about" class="hero" style="display: none;">
-<img class="hero-img" src="p.jpeg" alt="A skilled logo designer's portfolio image">
+        <section id="skill" class="skills-section" style="display: none;" aria-labelledby="skill-heading">
+            <div class="container">
+                <div class="section-title">
+                <img src="Untitled design (4).png" alt="Decorative underline" class="underline-img" width="200" height="80" loading="lazy">
+                    <p>Combining technical knowledge with creative design to deliver outstanding results</p>
+                </div>
+                
+                <div class="skills-grid">
+                    <!-- Web Development -->
+                    <div class="skill-card">
+                        <div class="skill-image">
+                            <img src="https://images.unsplash.com/photo-1627398242454-45a1465c2479?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Web Development" loading="lazy">
+                        </div>
+                        <div class="skill-content">
+                            <div class="skill-title">
+                                <h3>Web Development</h3>
+                            </div>
+                            <p>Able to create simple landing page websites with basic and slightly unique features using HTML, CSS, JavaScript, and GitHub. Currently not yet experienced with server hosting or integrating server-based databases such as SQL.</p>
+                            <div class="skill-tags">
+                                <span class="skill-tag">HTML/CSS</span>
+                                <span class="skill-tag">JavaScript</span>
+                                <span class="skill-tag">GitHub</span>
+                                <span class="skill-tag">Responsive Design</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Fast Learning -->
+                    <div class="skill-card">
+                        <div class="skill-image">
+                            <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Fast Learning" loading="lazy">
+                        </div>
+                        <div class="skill-content">
+                            <div class="skill-title">
+                                <h3>Fast Learner</h3>
+                            </div>
+                            <p>I learn anything new that I'm interested in intensely and quickly. This allows me to adapt to new technologies and methodologies efficiently, making me a valuable asset in dynamic work environments.</p>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Quick Adaptation</span>
+                                <span class="skill-tag">Curiosity</span>
+                                <span class="skill-tag">Problem Solving</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Graphic Design -->
+                    <div class="skill-card">
+                        <div class="skill-image">
+                            <img src="3d glass window logo mockup.png" alt="Graphic Design" loading="lazy">
+                        </div>
+                        <div class="skill-content">
+                            <div class="skill-title">
+                                <h3>Graphic Design</h3>
+                            </div>
+                            <p>Experienced with Adobe Photoshop and Adobe Illustrator. I've been a Fiverr seller for one year and have worked with two international clients offering logo design services. However, I plan to shift my focus from logo design to web development in the future.</p>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Adobe Photoshop</span>
+                                <span class="skill-tag">Adobe Illustrator</span>
+                                <span class="skill-tag">Logo Design</span>
+                                <span class="skill-tag">Brand Identity</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Python -->
+                    <div class="skill-card">
+                        <div class="skill-image">
+                            <img src="https://images.unsplash.com/photo-1526379879527-8559ecfcaec0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Python Programming" loading="lazy">
+                        </div>
+                        <div class="skill-content">
+                            <div class="skill-title">
+                                <h3>Python (Basic)</h3>
+                            </div>
+                            <p>Have created a cashier application using Python with local data storage and a checkout feature. This demonstrates my ability to apply programming concepts to practical, real-world problems.</p>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">Application Development</span>
+                                <span class="skill-tag">Problem Solving</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Communication -->
+                    <div class="skill-card">
+                        <div class="skill-image">
+                            <img src="https://images.unsplash.com/photo-1587560699334-cc4ff634909a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Communication Skills" loading="lazy">
+                        </div>
+                        <div class="skill-content">
+                            <div class="skill-title">
+                                <h3>Communication</h3>
+                            </div>
+                            <p>Strong written communication skills, especially in English. I've served two international clients on Fiverr, and one of them gave a positive review highlighting my communication skills. However, I'm still working on improving my public speaking.</p>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Written English</span>
+                                <span class="skill-tag">Client Communication</span>
+                                <span class="skill-tag">Collaboration</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Music & Audio -->
+                    <div class="skill-card">
+                        <div class="skill-image">
+                            <img src="DIMENSI BAND (95).JPG" alt="Music and Audio" loading="lazy">
+                        </div>
+                        <div class="skill-content">
+                            <div class="skill-title">
+                                <h3>Music & Audio</h3>
+                            </div>
+                            <p>I play guitar and often perform at campus gigs with my band, giving me a basic understanding of live sound mixing for instruments like electric guitar and electronic drums. I also create electric guitar cover content for social media, handling the entire process myself — from video and audio recording to editing.</p>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Guitar</span>
+                                <span class="skill-tag">Live Performance</span>
+                                <span class="skill-tag">Audio Recording</span>
+                                <span class="skill-tag">Video Editing</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Organization & Leadership -->
+                    <div class="skill-card">
+                        <div class="skill-image">
+                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Organization and Leadership" loading="lazy">
+                        </div>
+                        <div class="skill-content">
+                            <div class="skill-title">
+                                <h3>Organization & Leadership</h3>
+                            </div>
+                            <p>Actively involved in campus organizations — currently serving as treasurer in the scouting organization and president of the campus music club. I'll also serve as part of the Student Executive Board (leadership training division) next year. These experiences have helped me build strong social and organizational skills.</p>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Leadership</span>
+                                <span class="skill-tag">Team Management</span>
+                                <span class="skill-tag">Event Planning</span>
+                                <span class="skill-tag">Organization</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- AI Productivity -->
+                    <div class="skill-card">
+                        <div class="skill-image">
+                            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="AI Productivity" loading="lazy">
+                        </div>
+                        <div class="skill-content">
+                            <div class="skill-title">
+                                <h3>AI Productivity User</h3>
+                            </div>
+                            <p>I integrate AI tools into most of my tasks and multitasking routines, allowing me to work in an organized and efficient manner. This approach enhances my productivity and helps me deliver high-quality work in shorter timeframes.</p>
+                            <div class="skill-tags">
+                                <span class="skill-tag">AI Tools</span>
+                                <span class="skill-tag">Productivity</span>
+                                <span class="skill-tag">Efficiency</span>
+                                <span class="skill-tag">Multitasking</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <div  class="hero-text">
-        <h1>ABOUT</h1>
-        <p>a skilled logo designer passionate about turning ideas into visually stunning logos that make brands stand out. Whether you need a unique logo design from scratch or want to enhance your existing 2D logo into an eye-catching 3D masterpiece, I’ve got you covered!
-            
-            my designs meet professional standards. With a friendly approach and fast communication, I make sure to keep you updated every step of the way.
-            
-            Let’s collaborate to bring your vision to life! Feel free to message me with your project details or place an order—I’m here to help your brand shine!</p>
-    </div>  
-</section>
+        <section id="review" class="hero" style="display: none;" aria-labelledby="review-heading">
+            <img class="hero-img" src="Screenshot 2025-02-22 224027.png" alt="5-star client review screenshot" width="400" height="300" loading="lazy">
+            <div class="hero-text">
+                <h1 id="review-heading">REVIEW</h1>
+                <p>I received a 5-star review from an international client who was highly satisfied with my design services. In the review, they highlighted my clear communication, quick response to revisions, and professional, polite attitude throughout the process.</p>
+                <p>They also appreciated my attention to detail and the final result, which met their expectations. The key factors that contributed to their positive experience were responsive communication, fast revisions, and design precision.</p>
+                <a href="https://www.fiverr.com/s/R7d1Nk2" class="cta-btn">See me on Fiverr</a>
+            </div>  
+        </section>
+    </main>
 
-<section id="skill" class="hero1" style="display: none;">
-    <div class="hero1-text">
-        <h1>SKILLS</h1>
-        <p>I’m a freelance logo designer specializing in geometric designs, composition balance, and color psychology. I have experience using Adobe Illustrator & Photoshop and offer professional services on Fiverr with unlimited revisions. Additionally, I’m developing my skills in front-end web development, focusing on minimalist UI design without frameworks. With strong communication in English and Indonesian, I’m ready to expand my services to programming to grow my portfolio and income.</p>
-    </div>
-<img class="hero1-img" src="3d glass window logo mockup.png" alt="3D glass window logo mockup">
-
-</section>
-
-<section id="review" class="hero2" style="display: none;">
-<img class="hero2-img" src="Screenshot 2025-02-22 224027.png" alt="Screenshot of a 5-star review">
-
-    <div  class="hero2-text">
-        <h1>REVIEW</h1>
-        <p>
-            I received a 5-star review from an international client who was highly satisfied with my design services. In the review, they highlighted my clear communication, quick response to revisions, and professional, polite attitude throughout the process. They also appreciated my attention to detail and the final result, which met their expectations. The key factors that contributed to their positive experience were responsive communication, fast revisions, and design precision. This review further strengthens my commitment to delivering top-quality work and ensuring client satisfaction as my top priority.
-        </p>
-            <a href="https://www.fiverr.com/s/R7d1Nk2" class="cta-btn">see me on Fiverr</a>
-        </div>  
-    </section>
-
-
-        <!-- ======================= -->
-        
-        
-        <footer>
-            <div><a href="#" onclick="copyText()">ahfura70@gmail.com</a></div>
-        </footer>
-        <script src="script.js"></script>
-    </body>
+    <footer role="contentinfo">
+        <div>
+            <a href="#" onclick="copyText()" aria-label="Copy email to clipboard">
+                ahfura70@gmail.com
+            </a>
+        </div>
+    </footer>
     
-    </html>
+    <script src="script.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        if (window.innerWidth <= 480) {
+        document.querySelectorAll('.hide-mobile').forEach(btn => {
+            btn.style.display = 'none';
+        });
+        }
+
+        window.addEventListener('resize', () => {
+        document.querySelectorAll('.hide-mobile').forEach(btn => {
+            btn.style.display = (window.innerWidth <= 480) ? 'none' : 'inline-block';
+        });
+        });
+    });
+    </script>
+</body>
+</html>
