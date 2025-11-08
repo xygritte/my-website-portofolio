@@ -1,7 +1,7 @@
 class PortfolioApp {
     constructor() {
         this.helloWorldSection = document.getElementById('hello-world');
-        this.sections = document.querySelectorAll('.hero, .skills-section');
+        this.sections = document.querySelectorAll('.hero, .skills-section, .projects-section');
         this.navLinks = document.querySelectorAll('.nav-links a');
         this.logoLink = document.querySelector('.logo-link');
         
