@@ -11,7 +11,7 @@
     <header role="banner">
         <nav role="navigation" aria-label="Main navigation">
             <a href="#hello-world" class="logo-link">
-                <img src="profile.png" class="portfoliopict" alt="Portfolio Logo" width="150" height="60">
+                <img src="profile.png" class="portfoliopict" alt="Portfolio Logo" width="150" height="50">
             </a>
 
             <ul class="nav-links">
@@ -223,7 +223,7 @@
     <script src="script.js"></script>
     <script>
     document.addEventListener("DOMContentLoaded", function() {
-        if (window.innerWidth <= 480) {
+        if (window.innerWidth <= 768) {
         document.querySelectorAll('.hide-mobile').forEach(btn => {
             btn.style.display = 'none';
         });
@@ -231,7 +231,7 @@
 
         window.addEventListener('resize', () => {
         document.querySelectorAll('.hide-mobile').forEach(btn => {
-            btn.style.display = (window.innerWidth <= 480) ? 'none' : 'inline-block';
+            btn.style.display = (window.innerWidth <= 768) ? 'none' : 'inline-block';
         });
         });
     });

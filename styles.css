@@ -361,7 +361,7 @@ footer a:focus {
     }
 
     .nav-links {
-        flex-direction: column;
+        flex-direction: row;
         gap: var(--spacing-sm);
         text-align: center;
     }
