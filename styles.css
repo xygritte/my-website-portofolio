@@ -303,6 +303,13 @@ nav {
     opacity: 0.9;
 }
 
+.project-images {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    justify-content: center;
+}
+
 /* Animations */
 @keyframes fadeIn {
     from {
