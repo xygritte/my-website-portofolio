@@ -179,3 +179,116 @@ if (!document.querySelector('#notification-styles')) {
     `;
     document.head.appendChild(notificationStyles);
 }
+
+// Add this CSS to your stylesheet or in a style tag
+const mobileNotificationCSS = `
+.mobile-notification {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+.mobile-notification.active {
+    opacity: 1;
+    visibility: visible;
+}
+.notification-content {
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(193, 0, 164, 0.7);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    max-width: 300px;
+    width: 80%;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+.notification-content h3 {
+    margin: 0 0 15px 0;
+    color: #000000ff;
+    font-size: 18px;
+}
+.notification-content p {
+    margin: 0 0 20px 0;
+    color: #ffffffff;
+    font-size: 14px;
+}
+.close-btn {
+    background: rgba(255, 255, 255, 0.4);
+    border: none;
+    border-radius: 50px;
+    padding: 10px 25px;
+    color: #333;
+    font-size: 14px;
+    cursor: pointer;
+}
+.close-btn:hover {
+    transition: 0.3s ease-in-out;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 10px 38px;
+}
+`;
+
+// Add CSS to document
+const style = document.createElement('style');
+style.textContent = mobileNotificationCSS;
+document.head.appendChild(style);
+
+// Create notification HTML
+const notificationHTML = `
+<div class="mobile-notification" id="mobileNotification">
+    <div class="notification-content">
+        <h3>Mobile Detected</h3>
+        <p>For better experience, we recommend using your desktop browser.</p>
+        <button class="close-btn" onclick="closeMobileNotification()">Got it!</button>
+    </div>
+</div>
+`;
+
+// Add notification to body
+document.body.insertAdjacentHTML('beforeend', notificationHTML);
+
+// Mobile detection function
+function isMobileDevice() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+           (window.innerWidth <= 768);
+}
+
+// Close notification function
+function closeMobileNotification() {
+    const notification = document.getElementById('mobileNotification');
+    notification.classList.remove('active');
+    localStorage.setItem('mobileNotificationClosed', 'true');
+}
+
+// Show notification
+function showMobileNotification() {
+    if (isMobileDevice() && !localStorage.getItem('mobileNotificationClosed')) {
+        setTimeout(() => {
+            const notification = document.getElementById('mobileNotification');
+            notification.classList.add('active');
+        }, 1000);
+    }
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', showMobileNotification);
+
+// Close when clicking outside
+document.getElementById('mobileNotification').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeMobileNotification();
+    }
+});
