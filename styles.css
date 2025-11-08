@@ -472,6 +472,11 @@ footer a:focus .text {
     transition: var(--transition);
     }
 
+    .underline-img{
+        width: 50%;
+        height: auto;
+    }
+
 
     header {
         padding: var(--spacing-md);
@@ -548,6 +553,7 @@ footer a:focus .text {
 
     .hero {
         padding: 3rem 1rem;
+        margin-top: 0.1rem;
     }
 
     .skills-section,
