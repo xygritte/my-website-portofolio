@@ -117,16 +117,16 @@ window.addEventListener('popstate', () => {
 });
 
 // Email copy function (keep your existing function)
-function copyText() {
-    const email = "ramadhani.frqn";
+// function copyText() {
+//     const email = "ramadhani.frqn";
     
-    navigator.clipboard.writeText(email).then(() => {
-        showNotification('copied to clipboard!');
-    }).catch(err => {
-        console.error('Failed to copy: ', err);
-        showNotification('Failed to copy. Please try again.', true);
-    });
-}
+//     navigator.clipboard.writeText(email).then(() => {
+//         showNotification('copied to clipboard!');
+//     }).catch(err => {
+//         console.error('Failed to copy: ', err);
+//         showNotification('Failed to copy. Please try again.', true);
+//     });
+// }
 
 // Notification function (keep your existing function)
 function showNotification(message, isError = false) {
