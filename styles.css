@@ -133,6 +133,14 @@ nav {
     color: var(--text-color);
 }
 
+.welcome-logo {
+    width: 60%;
+    height: auto;
+    margin-top: -7rem;
+    margin-bottom: -7rem;
+    transition: var(--transition);
+}
+
 .hero {
     display: none;
     justify-content: center;
