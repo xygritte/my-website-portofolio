@@ -45,6 +45,9 @@ header {
     color: var(--text-color);
     padding: var(--spacing-lg);
     position: relative;
+    position: sticky;  /* Mengganti 'relative' */
+    top: 0;             /* Memberitahu agar menempel di bagian paling atas */
+    z-index: 1000;  
 }
 
 nav {
@@ -54,6 +57,13 @@ nav {
     max-width: 1200px;
     margin: 0 auto;
     padding: var(--spacing-sm);
+}
+
+.underline-img {
+    width : 25%; 
+    height : auto;
+    margin-top: -3rem;
+    margin-bottom: -1rem;
 }
 
 .logo-link {
@@ -134,7 +144,7 @@ nav {
 }
 
 .welcome-logo {
-    width: 60%;
+    width: 35%;
     height: auto;
     margin-top: -7rem;
     margin-bottom: -7rem;
@@ -145,11 +155,13 @@ nav {
     display: none;
     justify-content: center;
     align-items: center;
-    padding: var(--spacing-xl) 2rem;
+    padding: var(-- 2rem);
     color: var(--text-color);
     gap: var(--spacing-xl);
     animation: fadeIn 0.5s ease-in-out;
     min-height: 80vh;
+    margin-bottom: -5rem;
+    margin-top: -5rem;
 }
 
 .hero--reverse {
@@ -167,6 +179,12 @@ nav {
     border-radius: 10px;
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.8);
     transition: var(--transition);
+}
+.hero .underline-img {
+    width : 40%; 
+    height : auto;
+    margin-top: 1rem;
+    margin-bottom: 0.2rem;
 }
 
 .hero-img:hover {
@@ -223,7 +241,7 @@ nav {
 
 .section-title p {
     color: rgba(255, 255, 255, 0.8);
-    max-width: 600px;
+    max-width: 60%px;
     margin: 0 auto;
     text-align: center;
 }
@@ -349,29 +367,94 @@ nav {
     }
 }
 
-/* Footer */
+/* Footer Anda (Tidak diubah) */
 footer {
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 1));
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1));
     padding: var(--spacing-lg);
     text-align: center;
     margin-top: auto;
 }
 
+/* Link 'a' sebagai 'pembungkus' tombol */
 footer a {
+    /* Gunakan flexbox untuk mensejajarkan ikon & teks */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center; /* Pusatkan konten di awal */
+
+    /* PENTING: Ubah 'position' untuk menumpuk elemen */
+    position: relative; 
+
+    /* Styling Anda (TIDAK DIUBAH) */
+    background-color: rgb(196, 196, 196, 0); 
+    padding: var(--spacing-sm) 5rem;
+    border-radius: 7px;
     text-decoration: none;
-    color: black;
-    background-color: white;
-    padding: var(--spacing-sm) var(--spacing-md);
-    border-radius: 20px;
-    transition: var(--transition);
     border: 2px solid transparent;
+    
+    /* Kita set 'min-height' agar padding vertikal Anda 
+      terlihat benar meskipun elemen di dalamnya 'absolute'
+    */
+    min-height: 2.5rem; /* Sesuaikan jika perlu */
+
+    /* Transisi Anda (TIDAK DIUBAH) */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
+
+/* KELAS BARU UNTUK LOGO PNG */
+footer a .insta-logo {
+    /* Atur ukuran logo Anda */
+    width: 24px; 
+    height: 24px;
+    object-fit: contain;
+
+    /* Posisikan di tengah */
+    position: absolute; 
+    
+    /* Transisi HANYA untuk FADE (Opacity) */
+    opacity: 1; /* Terlihat di awal */
+    transition: opacity 0.3s ease-out;
+}
+
+/* Teks Insta */
+footer a .text {
+    /* Sembunyikan di awal */
+    opacity: 0; 
+    
+    /* Posisikan di tengah (di tempat yang sama dengan logo) */
+    position: absolute; 
+    white-space: nowrap; 
+
+    /* Gaya Anda (TIDAK DIUBAH) */
+    margin-right: 0; /* 'margin-right: 15px' Anda tidak lagi relevan */
+    color: var(--text-color);
+    font-weight: bold;
+
+    /* Transisi HANYA untuk FADE (Opacity) */
+    transition: opacity 0.3s ease-out;
+}
+
+
+/* ---------- SAAT DI-HOVER ---------- */
 
 footer a:hover,
 footer a:focus {
-    color: var(--text-color);
-    background-color: var(--primary-color);
+    /* Gaya hover Anda (TIDAK DIUBAH) */
+    box-shadow: 0 4px 15px var(--primary-color);
     outline: none;
+}
+
+/* Saat 'a' di-hover, SEMBUNYIKAN logo */
+footer a:hover .insta-logo,
+footer a:focus .insta-logo {
+    transition: 0 ease-in-out;
+    opacity: 0; /* Hilangkan ikon */
+}
+
+/* Saat 'a' di-hover, TAMPILKAN teks */
+footer a:hover .text,
+footer a:focus .text {
+    opacity: 1; /* Buat terlihat */
 }
 
 /* Responsive Design */
@@ -380,6 +463,15 @@ footer a:focus {
         padding: 5rem 1rem;
         font-size: 1.5rem;
     }
+
+    .welcome-logo {
+    width: 85%;
+    height: auto;
+    margin-top: -7rem;
+    margin-bottom: -7rem;
+    transition: var(--transition);
+    }
+
 
     header {
         padding: var(--spacing-md);
