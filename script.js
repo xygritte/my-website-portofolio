@@ -118,13 +118,13 @@ window.addEventListener('popstate', () => {
 
 // Email copy function (keep your existing function)
 function copyText() {
-    const email = "ahfura70@gmail.com";
+    const email = "ramadhani.frqn";
     
     navigator.clipboard.writeText(email).then(() => {
-        showNotification('Email copied to clipboard!');
+        showNotification('copied to clipboard!');
     }).catch(err => {
         console.error('Failed to copy: ', err);
-        showNotification('Failed to copy email. Please try again.', true);
+        showNotification('Failed to copy. Please try again.', true);
     });
 }
 
