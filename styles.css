@@ -28,7 +28,7 @@ body {
     background-image: url('background.png');
     background-attachment: fixed;
     background-size: cover;
-    background-position: center;  /* posisi gambar di tengah */
+    background-position: center;
 }
 
 /* Typography */
@@ -49,9 +49,9 @@ header {
     color: var(--text-color);
     padding: var(--spacing-lg);
     position: relative;
-    position: sticky;  /* Mengganti 'relative' */
-    top: 0;             /* Memberitahu agar menempel di bagian paling atas */
-    z-index: 1000;  
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 nav {
@@ -64,8 +64,8 @@ nav {
 }
 
 .underline-img {
-    width : 25%; 
-    height : auto;
+    width: 25%;
+    height: auto;
     margin-top: -3rem;
     margin-bottom: -1rem;
 }
@@ -75,7 +75,8 @@ nav {
 }
 
 .portfoliopict {
-    width: 150px;
+    margin-top: 0.2rem;
+    width: 120px;
     height: auto;
     transition: var(--transition);
 }
@@ -160,40 +161,56 @@ nav {
     transform: scale(1.05);
 }
 
+/* Hero Section (ABOUT) - Tetap seperti semula */
 .hero {
     display: none;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    padding: var(-- 2rem);
+    padding: 1rem;
     color: var(--text-color);
-    gap: var(--spacing-xl);
     animation: fadeIn 0.5s ease-in-out;
-    min-height: 80vh;
-    margin-bottom: -5rem;
-    margin-top: -8rem;
+    margin-top: -1rem;
+    margin-left: 8%;
 }
 
-.hero--reverse {
-    flex-direction: row-reverse;
-}
-
-.hero-text {
-    max-width: 500px;
-    flex: 1;
+.hero-content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: var(--spacing-xl);
+    max-width: 1000px;
+    width: 100%;
 }
 
 .hero-img {
-    width: min(100%, 400px);
+    width: min(100%, 350px);
     height: auto;
     border-radius: 10px;
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.8);
     transition: var(--transition);
+    flex-shrink: 0;
 }
+
+.hero-text {
+    max-width: 600px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
 .hero .underline-img {
-    width : 40%; 
-    height : auto;
-    margin-top: 1rem;
-    margin-bottom: 0.2rem;
+    width: 200px; /* Fixed width untuk konsistensi */
+    height: auto;
+    margin-bottom: 0.5rem;
+    align-self: flex-start;
+}
+
+.hero-text p {
+    text-align: left;
+    margin-bottom: var(--spacing-md);
+    line-height: 1.7;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .hero-img:hover {
@@ -206,7 +223,7 @@ nav {
     padding: var(--spacing-xl) 2rem;
     color: var(--text-color);
     animation: fadeIn 0.5s ease-in-out;
-    min-height: 80vh;
+    min-height: auto;
 }
 
 /* Projects Section */
@@ -215,7 +232,7 @@ nav {
     padding: var(--spacing-xl) 2rem;
     color: var(--text-color);
     animation: fadeIn 0.5s ease-in-out;
-    min-height: 80vh;
+    min-height: auto;
 }
 
 .container {
@@ -223,9 +240,75 @@ nav {
     margin: 0 auto;
 }
 
+/* Section Header untuk Expandable Sections */
+.section-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    padding: var(--spacing-lg) 0;
+    transition: var(--transition);
+    margin-bottom: 0;
+}
+
+.section-header:hover {
+    transform: scale(1.02);
+}
+
+.expand-trigger {
+    margin-bottom: 0;
+    cursor: pointer;
+    text-align: center;
+}
+
+.expand-icon {
+    position: absolute;
+    right: 20%;
+    font-size: 2.5rem;
+    color: var(--text-color);
+    font-weight: 300;
+    transition: var(--transition);
+    opacity: 0.7;
+}
+
+.section-header:hover .expand-icon {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.skills-section.expanded .expand-icon,
+.projects-section.expanded .expand-icon {
+    transform: rotate(45deg);
+}
+
+/* Expand Content */
+.expand-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+}
+
+.skills-section.expanded .expand-content,
+.projects-section.expanded .expand-content {
+    max-height: 5000px;
+}
+
+/* Adjust section spacing for expandable sections */
+.skills-section .container,
+.projects-section .container {
+    padding-bottom: 0;
+}
+
+.skills-section.expanded .container,
+.projects-section.expanded .container {
+    padding-bottom: var(--spacing-xl);
+}
+
+/* Section Title */
 .section-title {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 0;
 }
 
 .section-title h1 {
@@ -255,11 +338,13 @@ nav {
     text-align: center;
 }
 
+/* Skills and Projects Grid */
 .skills-grid,
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 30px;
+    margin-top: var(--spacing-lg);
 }
 
 .skill-card,
@@ -346,8 +431,6 @@ nav {
     backdrop-filter: blur(10px);
 }
 
-
-
 .project-images {
     display: flex;
     flex-direction: column;
@@ -367,7 +450,7 @@ nav {
     }
 }
 
-/* Footer Anda (Tidak diubah) */
+/* Footer */
 footer {
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1));
     padding: var(--spacing-lg);
@@ -377,69 +460,43 @@ footer {
 
 /* Link 'a' sebagai 'pembungkus' tombol */
 footer a {
-    /* Gunakan flexbox untuk mensejajarkan ikon & teks */
     display: inline-flex;
     align-items: center;
-    justify-content: center; /* Pusatkan konten di awal */
-
-    /* PENTING: Ubah 'position' untuk menumpuk elemen */
-    position: relative; 
-
-    /* Styling Anda (TIDAK DIUBAH) */
-    background-color: rgb(196, 196, 196, 0); 
+    justify-content: center;
+    position: relative;
+    background-color: rgb(196, 196, 196, 0);
     padding: var(--spacing-sm) 5rem;
     border-radius: 7px;
     text-decoration: none;
     border: 2px solid transparent;
-    
-    /* Kita set 'min-height' agar padding vertikal Anda 
-      terlihat benar meskipun elemen di dalamnya 'absolute'
-    */
-    min-height: 2.5rem; /* Sesuaikan jika perlu */
-
-    /* Transisi Anda (TIDAK DIUBAH) */
+    min-height: 2.5rem;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* KELAS BARU UNTUK LOGO PNG */
 footer a .insta-logo {
-    /* Atur ukuran logo Anda */
-    width: 24px; 
+    width: 24px;
     height: 24px;
     object-fit: contain;
-
-    /* Posisikan di tengah */
-    position: absolute; 
-    
-    /* Transisi HANYA untuk FADE (Opacity) */
-    opacity: 1; /* Terlihat di awal */
+    position: absolute;
+    opacity: 1;
     transition: opacity 0.3s ease-out;
 }
 
 /* Teks Insta */
 footer a .text {
-    /* Sembunyikan di awal */
-    opacity: 0; 
-    
-    /* Posisikan di tengah (di tempat yang sama dengan logo) */
-    position: absolute; 
-    white-space: nowrap; 
-
-    /* Gaya Anda (TIDAK DIUBAH) */
-    margin-right: 0; /* 'margin-right: 15px' Anda tidak lagi relevan */
+    opacity: 0;
+    position: absolute;
+    white-space: nowrap;
+    margin-right: 0;
     color: var(--text-color);
     font-weight: bold;
-
-    /* Transisi HANYA untuk FADE (Opacity) */
     transition: opacity 0.3s ease-out;
 }
 
-
 /* ---------- SAAT DI-HOVER ---------- */
-
 footer a:hover,
 footer a:focus {
-    /* Gaya hover Anda (TIDAK DIUBAH) */
     box-shadow: 0 4px 15px var(--primary-color);
     outline: none;
 }
@@ -448,13 +505,45 @@ footer a:focus {
 footer a:hover .insta-logo,
 footer a:focus .insta-logo {
     transition: 0 ease-in-out;
-    opacity: 0; /* Hilangkan ikon */
+    opacity: 0;
 }
 
 /* Saat 'a' di-hover, TAMPILKAN teks */
 footer a:hover .text,
 footer a:focus .text {
-    opacity: 1; /* Buat terlihat */
+    opacity: 1;
+}
+
+@media screen and (max-width: 968px) {
+    .hero {
+        margin-left: 0;
+    }
+
+    .hero-content {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-lg);
+    }
+    
+    .hero-text {
+        align-items: center;
+        text-align: center;
+    }
+    
+    .hero .underline-img {
+        align-self: center;
+        z-index: 1;
+
+    }
+    
+    .hero-text p {
+        text-align: center;
+    }
+    
+    .hero-img {
+        width: 100%;
+        max-width: 300px;
+    }
 }
 
 /* Responsive Design */
@@ -465,18 +554,26 @@ footer a:focus .text {
     }
 
     .welcome-logo {
-    width: 85%;
-    height: auto;
-    margin-top: -7rem;
-    margin-bottom: -7rem;
-    transition: var(--transition);
+        width: 85%;
+        height: auto;
+        margin-top: -7rem;
+        margin-bottom: -7rem;
+        transition: var(--transition);
     }
 
-    .underline-img{
+    .underline-img {
         width: 50%;
         height: auto;
     }
 
+    .expand-icon {
+        right: 10%;
+        font-size: 2rem;
+    }
+
+    .section-header {
+        padding: var(--spacing-md) 0;
+    }
 
     header {
         padding: var(--spacing-md);
@@ -500,7 +597,7 @@ footer a:focus .text {
     .nav-links a {
         font-weight: bolder;
         opacity: 50%;
-        }
+    }
 
     .cta-btn {
         width: 100%;
@@ -512,19 +609,34 @@ footer a:focus .text {
         padding: 5rem 1rem;
         text-align: center;
         gap: var(--spacing-lg);
+        margin-top: -4rem;
+        margin-bottom: -2rem;
     }
 
-    .hero--reverse {
+    .hero-content {
         flex-direction: column;
+        align-items: center;
     }
 
     .hero-text {
         max-width: 100%;
+        align-items: center; /* Center align on mobile */
+    }
+
+    .hero .underline-img {
+        align-self: center; /* Center title on mobile */
+        width: 60%; /* Slightly larger on mobile */
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .hero-text p {
+        text-align: center; /* Center text on mobile */
     }
 
     .hero-img {
         width: 100%;
         max-width: 300px;
+        order: -1; /* Image first on mobile */
     }
 
     .skills-section,
@@ -559,9 +671,13 @@ footer a:focus .text {
 
     .hero {
         padding: 3rem 1rem;
-        margin-top: 0.1rem;
+        margin-top: -2rem;
+        margin-bottom: 0;
     }
 
+    .hero .underline-img {
+        width: 50%; /* Even larger on very small screens */
+    }
     .skills-section,
     .projects-section {
         padding: 3rem 1rem;
@@ -575,6 +691,10 @@ footer a:focus .text {
     .skill-card,
     .project-card {
         margin: 0 10px;
+    }
+
+    .expand-icon {
+        right: 5%;
     }
 }
 

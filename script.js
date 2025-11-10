@@ -5,6 +5,13 @@ class PortfolioApp {
         this.navLinks = document.querySelectorAll('.nav-links a');
         this.logoLink = document.querySelector('.logo-link');
         
+        // Variabel untuk scroll navigation
+        this.sectionIds = ['hello-world', 'about', 'skill', 'project'];
+        this.currentSectionIndex = 0;
+        this.isScrolling = false;
+        this.scrollDelay = 1000; // Delay antar scroll (ms)
+        this.scrollThreshold = 50; // Jarak dari ujung halaman untuk trigger scroll
+        
         this.init();
     }
 
@@ -12,14 +19,21 @@ class PortfolioApp {
         this.setupNavigation();
         this.setupLogoLink();
         this.setupKeyboardNavigation();
+        this.setupScrollNavigation();
+        this.setupExpandableSections();
         
         // Show initial section based on URL hash
         const hash = window.location.hash.substring(1);
         if (hash && document.getElementById(hash)) {
             this.showSection(hash);
+            this.currentSectionIndex = this.sectionIds.indexOf(hash);
         } else {
             this.showSection('hello-world');
+            this.currentSectionIndex = 0;
         }
+
+        // Create scroll indicator
+        this.createScrollIndicator();
     }
 
     setupNavigation() {
@@ -28,6 +42,8 @@ class PortfolioApp {
                 event.preventDefault();
                 const targetId = event.target.getAttribute('href').substring(1);
                 this.showSection(targetId);
+                this.currentSectionIndex = this.sectionIds.indexOf(targetId);
+                this.updateScrollIndicator();
                 
                 // Update URL without page reload
                 history.pushState(null, null, `#${targetId}`);
@@ -48,6 +64,8 @@ class PortfolioApp {
             this.logoLink.addEventListener('click', (event) => {
                 event.preventDefault();
                 this.showSection('hello-world');
+                this.currentSectionIndex = 0;
+                this.updateScrollIndicator();
                 history.pushState(null, null, '#hello-world');
             });
         }
@@ -58,13 +76,204 @@ class PortfolioApp {
             // Escape key to return to home
             if (event.key === 'Escape') {
                 this.showSection('hello-world');
+                this.currentSectionIndex = 0;
+                this.updateScrollIndicator();
                 history.pushState(null, null, '#hello-world');
+            }
+            
+            // Arrow keys for navigation
+            if (event.key === 'ArrowDown') {
+                event.preventDefault();
+                this.nextSection();
+            } else if (event.key === 'ArrowUp') {
+                event.preventDefault();
+                this.previousSection();
             }
         });
     }
 
+    // Method untuk setup expandable sections
+    setupExpandableSections() {
+        const expandTriggers = document.querySelectorAll('.expand-trigger');
+        const sectionHeaders = document.querySelectorAll('.section-header');
+        
+        // Setup untuk expand triggers (judul section)
+        expandTriggers.forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const section = trigger.closest('.skills-section, .projects-section');
+                if (section) {
+                    this.toggleSection(section);
+                }
+            });
+
+            // Add keyboard accessibility
+            trigger.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || event.key === ' ') {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const section = trigger.closest('.skills-section, .projects-section');
+                    if (section) {
+                        this.toggleSection(section);
+                    }
+                }
+            });
+        });
+
+        // Setup untuk section headers
+        sectionHeaders.forEach(header => {
+            header.addEventListener('click', (e) => {
+                const section = header.closest('.skills-section, .projects-section');
+                if (section) {
+                    this.toggleSection(section);
+                }
+            });
+        });
+    }
+
+    toggleSection(section) {
+        const isExpanded = section.classList.contains('expanded');
+        
+        if (isExpanded) {
+            section.classList.remove('expanded');
+        } else {
+            // Collapse other sections jika perlu
+            document.querySelectorAll('.skills-section.expanded, .projects-section.expanded').forEach(expandedSection => {
+                if (expandedSection !== section) {
+                    expandedSection.classList.remove('expanded');
+                }
+            });
+            
+            section.classList.add('expanded');
+            
+            // Scroll ke section yang di-expand
+            setTimeout(() => {
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
+    }
+
+    // Method untuk setup scroll navigation yang lebih tidak sensitif
+    setupScrollNavigation() {
+        let scrollTimeout;
+        let touchStartY = 0;
+        let isAtTop = false;
+        let isAtBottom = false;
+        
+        // Fungsi untuk check posisi scroll
+        const checkScrollPosition = () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight;
+            const clientHeight = window.innerHeight;
+            
+            isAtTop = scrollTop <= this.scrollThreshold;
+            isAtBottom = (scrollHeight - scrollTop - clientHeight) <= this.scrollThreshold;
+        };
+        
+        // Mouse wheel event
+        window.addEventListener('wheel', (e) => {
+            // Check posisi scroll terlebih dahulu
+            checkScrollPosition();
+            
+            // Hanya proses jika di ujung atas atau bawah
+            if ((e.deltaY > 0 && isAtBottom) || (e.deltaY < 0 && isAtTop)) {
+                // Clear existing timeout
+                clearTimeout(scrollTimeout);
+                
+                // Set timeout untuk mencegah scroll berlebihan
+                scrollTimeout = setTimeout(() => {
+                    if (this.isScrolling) return;
+                    
+                    this.isScrolling = true;
+                    
+                    // Tentukan arah scroll
+                    if (e.deltaY > 0 && isAtBottom) {
+                        // Scroll down di ujung bawah - next section
+                        this.nextSection();
+                    } else if (e.deltaY < 0 && isAtTop) {
+                        // Scroll up di ujung atas - previous section
+                        this.previousSection();
+                    }
+                    
+                    // Reset scrolling flag setelah delay
+                    setTimeout(() => {
+                        this.isScrolling = false;
+                    }, this.scrollDelay);
+                    
+                }, 150); // Delay sedikit lebih lama untuk debounce
+            }
+        }, { passive: true });
+
+        // Touch events untuk mobile
+        window.addEventListener('touchstart', (e) => {
+            touchStartY = e.touches[0].clientY;
+            checkScrollPosition(); // Check posisi saat mulai touch
+        }, { passive: true });
+        
+        window.addEventListener('touchend', (e) => {
+            if (this.isScrolling) return;
+            
+            const touchEndY = e.changedTouches[0].clientY;
+            const diff = touchStartY - touchEndY;
+            
+            // Minimum swipe distance dan harus di ujung halaman
+            if (Math.abs(diff) < 50) return;
+            
+            // Hanya proses swipe jika di ujung atas atau bawah
+            if ((diff > 0 && isAtBottom) || (diff < 0 && isAtTop)) {
+                this.isScrolling = true;
+                
+                if (diff > 0 && isAtBottom) {
+                    // Swipe up di ujung bawah - next section
+                    this.nextSection();
+                } else if (diff < 0 && isAtTop) {
+                    // Swipe down di ujung atas - previous section
+                    this.previousSection();
+                }
+                
+                setTimeout(() => {
+                    this.isScrolling = false;
+                }, this.scrollDelay);
+            }
+        }, { passive: true });
+
+        // Juga check scroll position saat page load dan resize
+        window.addEventListener('load', checkScrollPosition);
+        window.addEventListener('resize', checkScrollPosition);
+        window.addEventListener('scroll', checkScrollPosition);
+
+        // Prevent default spacebar scroll
+        window.addEventListener('keydown', (e) => {
+            if (e.key === ' ' && e.target === document.body) {
+                e.preventDefault();
+            }
+        });
+    }
+
+    // Method untuk pindah ke section berikutnya
+    nextSection() {
+        if (this.currentSectionIndex < this.sectionIds.length - 1) {
+            this.currentSectionIndex++;
+            const nextSectionId = this.sectionIds[this.currentSectionIndex];
+            this.showSection(nextSectionId);
+            this.updateScrollIndicator();
+            history.pushState(null, null, `#${nextSectionId}`);
+        }
+    }
+
+    // Method untuk pindah ke section sebelumnya
+    previousSection() {
+        if (this.currentSectionIndex > 0) {
+            this.currentSectionIndex--;
+            const prevSectionId = this.sectionIds[this.currentSectionIndex];
+            this.showSection(prevSectionId);
+            this.updateScrollIndicator();
+            history.pushState(null, null, `#${prevSectionId}`);
+        }
+    }
+
     showSection(sectionId) {
-        console.log('Showing section:', sectionId); // Debug log
+        console.log('Showing section:', sectionId);
         
         // Hide all sections
         this.helloWorldSection.style.display = 'none';
@@ -78,8 +287,21 @@ class PortfolioApp {
             if (sectionId === 'hello-world') {
                 this.helloWorldSection.style.display = 'flex';
             } else {
-                targetSection.style.display = 'flex';
+                targetSection.style.display = 'block';
+                
+                // JANGAN auto-expand section skill dan project
+                // Biarkan user yang klik untuk expand
+                if (sectionId === 'skill' || sectionId === 'project') {
+                    // Pastikan section dalam state collapsed
+                    targetSection.classList.remove('expanded');
+                }
             }
+            
+            // Smooth scroll ke atas section
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         }
 
         // Update active states
@@ -91,10 +313,57 @@ class PortfolioApp {
             const linkId = link.getAttribute('href').substring(1);
             if (linkId === activeId) {
                 link.setAttribute('aria-current', 'page');
-                link.style.borderBottomColor = 'tomato';
+                link.style.borderBottomColor = 'rgb(174, 0, 87)';
+                link.style.backgroundImage = 'linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1))';
             } else {
                 link.removeAttribute('aria-current');
                 link.style.borderBottomColor = 'transparent';
+                link.style.backgroundImage = 'none';
+            }
+        });
+    }
+
+    // Buat scroll indicator
+    createScrollIndicator() {
+        // Hapus existing indicator jika ada
+        const existingIndicator = document.querySelector('.scroll-indicator');
+        if (existingIndicator) {
+            existingIndicator.remove();
+        }
+
+        const indicator = document.createElement('div');
+        indicator.className = 'scroll-indicator';
+        indicator.innerHTML = `
+            <div class="scroll-dot" data-section="hello-world"></div>
+            <div class="scroll-dot" data-section="about"></div>
+            <div class="scroll-dot" data-section="skill"></div>
+            <div class="scroll-dot" data-section="project"></div>
+        `;
+        
+        document.body.appendChild(indicator);
+        
+        // Add click events untuk dots
+        indicator.querySelectorAll('.scroll-dot').forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                const sectionId = dot.getAttribute('data-section');
+                this.showSection(sectionId);
+                this.currentSectionIndex = index;
+                this.updateScrollIndicator();
+                history.pushState(null, null, `#${sectionId}`);
+            });
+        });
+        
+        this.updateScrollIndicator();
+    }
+
+    // Update scroll indicator
+    updateScrollIndicator() {
+        const dots = document.querySelectorAll('.scroll-dot');
+        dots.forEach((dot, index) => {
+            if (index === this.currentSectionIndex) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
             }
         });
     }
@@ -109,10 +378,14 @@ document.addEventListener('DOMContentLoaded', () => {
 // Handle browser back/forward buttons
 window.addEventListener('popstate', () => {
     const hash = window.location.hash.substring(1);
-    if (hash) {
+    if (hash && app.sectionIds.includes(hash)) {
         app.showSection(hash);
+        app.currentSectionIndex = app.sectionIds.indexOf(hash);
+        app.updateScrollIndicator();
     } else {
         app.showSection('hello-world');
+        app.currentSectionIndex = 0;
+        app.updateScrollIndicator();
     }
 });
 
@@ -175,6 +448,56 @@ if (!document.querySelector('#notification-styles')) {
         @keyframes slideOut {
             from { transform: translateX(0); opacity: 1; }
             to { transform: translateX(100%); opacity: 0; }
+        }
+        
+        /* Scroll Indicator Styles */
+        .scroll-indicator {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px 8px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .scroll-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .scroll-dot:hover {
+            background-color: rgba(255, 255, 255, 0.5);
+            transform: scale(1.1);
+        }
+        
+        .scroll-dot.active {
+            background-color: var(--primary-color);
+            transform: scale(1.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Hide scroll indicator on mobile */
+        @media screen and (max-width: 768px) {
+            .scroll-indicator {
+                display: none;
+            }
+        }
+        
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
         }
     `;
     document.head.appendChild(notificationStyles);
