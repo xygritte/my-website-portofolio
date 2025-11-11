@@ -692,6 +692,8 @@ html {
     .hero {
         margin-left: 0;
     }
+    
+    
 
     .hero-content {
         flex-direction: column;
@@ -724,6 +726,10 @@ html {
     .welcome-section {
         padding: 5rem 1rem;
         font-size: 1.5rem;
+    }
+
+    nav .cta-btn {
+        display: none;
     }
 
     .welcome-logo {
