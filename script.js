@@ -9,8 +9,8 @@ class PortfolioApp {
         this.sectionIds = ['hello-world', 'about', 'skill', 'project'];
         this.currentSectionIndex = 0;
         this.isScrolling = false;
-        this.scrollDelay = 1000; // Delay antar scroll (ms)
-        this.scrollThreshold = 50; // Jarak dari ujung halaman untuk trigger scroll
+        this.scrollDelay = 600; // Lebih cepat dari 1000ms
+        this.scrollThreshold = 30; // Lebih sensitif dari 50px
         
         this.init();
     }
@@ -92,6 +92,128 @@ class PortfolioApp {
         });
     }
 
+    // Method untuk setup scroll navigation yang sensitif
+    setupScrollNavigation() {
+        let scrollTimeout;
+        let touchStartY = 0;
+        
+        // Variabel instance untuk track scroll position
+        this.isAtTop = false;
+        this.isAtBottom = false;
+        
+        // Fungsi untuk check posisi scroll
+        const checkScrollPosition = () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight;
+            const clientHeight = window.innerHeight;
+            
+            this.isAtTop = scrollTop <= this.scrollThreshold;
+            this.isAtBottom = (scrollHeight - scrollTop - clientHeight) <= this.scrollThreshold;
+        };
+        
+        // Mouse wheel event - LEBIH SENSITIF
+        window.addEventListener('wheel', (e) => {
+            // Check posisi scroll terlebih dahulu
+            checkScrollPosition();
+            
+            // Cek jika di expanded section, biarkan scroll normal
+            const expandedSection = document.querySelector('.skills-section.expanded, .projects-section.expanded');
+            if (expandedSection) {
+                const sectionRect = expandedSection.getBoundingClientRect();
+                const isInExpandedSection = sectionRect.top < window.innerHeight && sectionRect.bottom > 0;
+                
+                if (isInExpandedSection) {
+                    // Biarkan user scroll di dalam expanded content
+                    return;
+                }
+            }
+            
+            // Hanya proses jika di ujung atas atau bawah - DENGAN THRESHOLD LEBIH RENDAH
+            if ((e.deltaY > 0 && this.isAtBottom) || (e.deltaY < 0 && this.isAtTop)) {
+                // Clear existing timeout
+                clearTimeout(scrollTimeout);
+                
+                // Set timeout yang lebih pendek untuk responsivitas lebih baik
+                scrollTimeout = setTimeout(() => {
+                    if (this.isScrolling) return;
+                    
+                    this.isScrolling = true;
+                    
+                    // Tentukan arah scroll dengan sensitivity tinggi
+                    if (e.deltaY > 0 && this.isAtBottom) {
+                        // Scroll down di ujung bawah - next section
+                        this.nextSection();
+                    } else if (e.deltaY < 0 && this.isAtTop) {
+                        // Scroll up di ujung atas - previous section
+                        this.previousSection();
+                    }
+                    
+                    // Reset scrolling flag dengan delay lebih pendek
+                    setTimeout(() => {
+                        this.isScrolling = false;
+                    }, this.scrollDelay);
+                    
+                }, 50); // Timeout lebih pendek dari 150ms
+            }
+        }, { passive: true });
+
+        // Touch events untuk mobile - LEBIH SENSITIF
+        window.addEventListener('touchstart', (e) => {
+            touchStartY = e.touches[0].clientY;
+            checkScrollPosition();
+        }, { passive: true });
+        
+        window.addEventListener('touchend', (e) => {
+            if (this.isScrolling) return;
+            
+            const touchEndY = e.changedTouches[0].clientY;
+            const diff = touchStartY - touchEndY;
+            
+            // Minimum swipe distance dikurangi untuk sensitivity lebih baik
+            if (Math.abs(diff) < 30) return; // Dari 50px menjadi 30px
+            
+            // Cek jika di expanded section
+            const expandedSection = document.querySelector('.skills-section.expanded, .projects-section.expanded');
+            if (expandedSection) {
+                const sectionRect = expandedSection.getBoundingClientRect();
+                const isInExpandedSection = sectionRect.top < window.innerHeight && sectionRect.bottom > 0;
+                
+                if (isInExpandedSection) {
+                    return; // Biarkan touch scroll di expanded content
+                }
+            }
+            
+            // Hanya proses swipe jika di ujung atas atau bawah
+            if ((diff > 0 && this.isAtBottom) || (diff < 0 && this.isAtTop)) {
+                this.isScrolling = true;
+                
+                if (diff > 0 && this.isAtBottom) {
+                    // Swipe up di ujung bawah - next section
+                    this.nextSection();
+                } else if (diff < 0 && this.isAtTop) {
+                    // Swipe down di ujung atas - previous section
+                    this.previousSection();
+                }
+                
+                setTimeout(() => {
+                    this.isScrolling = false;
+                }, this.scrollDelay);
+            }
+        }, { passive: true });
+
+        // Juga check scroll position saat page load dan resize
+        window.addEventListener('load', checkScrollPosition);
+        window.addEventListener('resize', checkScrollPosition);
+        window.addEventListener('scroll', checkScrollPosition);
+
+        // Prevent default spacebar scroll
+        window.addEventListener('keydown', (e) => {
+            if (e.key === ' ' && e.target === document.body) {
+                e.preventDefault();
+            }
+        });
+    }
+
     // Method untuk setup expandable sections
     setupExpandableSections() {
         const expandTriggers = document.querySelectorAll('.expand-trigger');
@@ -151,103 +273,6 @@ class PortfolioApp {
                 section.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }, 100);
         }
-    }
-
-    // Method untuk setup scroll navigation yang lebih tidak sensitif
-    setupScrollNavigation() {
-        let scrollTimeout;
-        let touchStartY = 0;
-        let isAtTop = false;
-        let isAtBottom = false;
-        
-        // Fungsi untuk check posisi scroll
-        const checkScrollPosition = () => {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const scrollHeight = document.documentElement.scrollHeight;
-            const clientHeight = window.innerHeight;
-            
-            isAtTop = scrollTop <= this.scrollThreshold;
-            isAtBottom = (scrollHeight - scrollTop - clientHeight) <= this.scrollThreshold;
-        };
-        
-        // Mouse wheel event
-        window.addEventListener('wheel', (e) => {
-            // Check posisi scroll terlebih dahulu
-            checkScrollPosition();
-            
-            // Hanya proses jika di ujung atas atau bawah
-            if ((e.deltaY > 0 && isAtBottom) || (e.deltaY < 0 && isAtTop)) {
-                // Clear existing timeout
-                clearTimeout(scrollTimeout);
-                
-                // Set timeout untuk mencegah scroll berlebihan
-                scrollTimeout = setTimeout(() => {
-                    if (this.isScrolling) return;
-                    
-                    this.isScrolling = true;
-                    
-                    // Tentukan arah scroll
-                    if (e.deltaY > 0 && isAtBottom) {
-                        // Scroll down di ujung bawah - next section
-                        this.nextSection();
-                    } else if (e.deltaY < 0 && isAtTop) {
-                        // Scroll up di ujung atas - previous section
-                        this.previousSection();
-                    }
-                    
-                    // Reset scrolling flag setelah delay
-                    setTimeout(() => {
-                        this.isScrolling = false;
-                    }, this.scrollDelay);
-                    
-                }, 150); // Delay sedikit lebih lama untuk debounce
-            }
-        }, { passive: true });
-
-        // Touch events untuk mobile
-        window.addEventListener('touchstart', (e) => {
-            touchStartY = e.touches[0].clientY;
-            checkScrollPosition(); // Check posisi saat mulai touch
-        }, { passive: true });
-        
-        window.addEventListener('touchend', (e) => {
-            if (this.isScrolling) return;
-            
-            const touchEndY = e.changedTouches[0].clientY;
-            const diff = touchStartY - touchEndY;
-            
-            // Minimum swipe distance dan harus di ujung halaman
-            if (Math.abs(diff) < 50) return;
-            
-            // Hanya proses swipe jika di ujung atas atau bawah
-            if ((diff > 0 && isAtBottom) || (diff < 0 && isAtTop)) {
-                this.isScrolling = true;
-                
-                if (diff > 0 && isAtBottom) {
-                    // Swipe up di ujung bawah - next section
-                    this.nextSection();
-                } else if (diff < 0 && isAtTop) {
-                    // Swipe down di ujung atas - previous section
-                    this.previousSection();
-                }
-                
-                setTimeout(() => {
-                    this.isScrolling = false;
-                }, this.scrollDelay);
-            }
-        }, { passive: true });
-
-        // Juga check scroll position saat page load dan resize
-        window.addEventListener('load', checkScrollPosition);
-        window.addEventListener('resize', checkScrollPosition);
-        window.addEventListener('scroll', checkScrollPosition);
-
-        // Prevent default spacebar scroll
-        window.addEventListener('keydown', (e) => {
-            if (e.key === ' ' && e.target === document.body) {
-                e.preventDefault();
-            }
-        });
     }
 
     // Method untuk pindah ke section berikutnya

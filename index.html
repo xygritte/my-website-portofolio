@@ -4,8 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Professional Logo Designer Portfolio">
-    <title>PROFILE</title>
+    <title>PROFILE - Professional Logo Designer</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="script.js" as="script">
+    <link rel="preload" href="profile.png" as="image">
+    
+    <!-- CSS -->
     <link rel="stylesheet" href="styles.css">
+    
     <!-- Favicon Comprehensive -->
     <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
@@ -16,19 +24,16 @@
     <link rel="icon" type="image/png" sizes="192x192" href="favicon_io/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="favicon_io/android-chrome-512x512.png">
     
-    <!-- Web App Manifest (Opsional untuk PWA) -->
+    <!-- Web App Manifest -->
     <link rel="manifest" href="favicon_io/site.webmanifest">
 </head>
 
 <body>
-<!-- ================================================= ~~~~~~ ================================================= -->
-<!-- ================================================= HEADER ================================================= -->
-<!-- ================================================= ~~~~~~ ================================================= -->
-
+    <!-- ================================================= HEADER ================================================= -->
     <header role="banner">
         <nav role="navigation" aria-label="Main navigation">
             <a href="#hello-world" class="logo-link">
-                <img src="logo.png" class="portfoliopict" alt="Portfolio Logo" width="150" height="50">
+                <img src="profile.svg" class="portfoliopict" alt="Portfolio Logo" width="150" height="50" loading="eager">
             </a>
 
             <ul class="nav-links">
@@ -42,24 +47,19 @@
         </nav>
     </header>
     
-<!-- ================================================= ~~~~~~~~~~~~~~~ ================================================= -->
-<!-- ================================================= WELCOME SECTION ================================================= -->
-<!-- ================================================= ~~~~~~~~~~~~~~~ ================================================= -->
-
+    <!-- ================================================= MAIN CONTENT ================================================= -->
     <main role="main">
+        <!-- WELCOME SECTION -->
         <section id="hello-world" class="welcome-section">
-             <a href="#about" id="nav-about"><img src="profile.png" alt="Portfolio Logo" class="welcome-logo" loading="lazy"></a>
+             <a href="#about" id="nav-about"><img src="profile.png" alt="Portfolio Logo" class="welcome-logo" loading="eager" width="600" height="300"></a>
         </section>
 
-<!-- ================================================= ~~~~~~~~~~~~~ ================================================= -->
-<!-- ================================================= ABOUT SECTION ================================================= -->
-<!-- ================================================= ~~~~~~~~~~~~~ ================================================= -->
-
+        <!-- ABOUT SECTION -->
         <section id="about" class="hero" style="display: none;" aria-labelledby="about-heading">
             <div class="hero-content">
                 <img class="hero-img" src="person.png" alt="Ahfura - Professional Logo Designer" width="400" height="400" loading="lazy">
                 <div class="hero-text">
-                    <img src="about.png" alt="About Section Title" class="underline-img" loading="lazy">
+                    <img src="about.png" alt="About Section Title" class="underline-img" loading="lazy" width="200" height="50">
                     <p>A skilled logo designer passionate about turning ideas into visually stunning logos that make brands stand out. Whether you need a unique logo design from scratch or want to enhance your existing 2D logo into an eye-catching 3D masterpiece, I've got you covered!</p>
                     <p>My designs meet professional standards. With a friendly approach and fast communication, I make sure to keep you updated every step of the way.</p>
                     <p>Let's collaborate to bring your vision to life! Feel free to message me with your project details or place an order—I'm here to help your brand shine!</p>
@@ -67,10 +67,7 @@
             </div>
         </section>
 
-<!-- ================================================= ~~~~~~~~~~~~~ ================================================= -->
-<!-- ================================================= SKILL SECTION ================================================= -->
-<!-- ================================================= ~~~~~~~~~~~~~ ================================================= -->
-
+        <!-- SKILL SECTION -->
         <section id="skill" class="skills-section" style="display: none;" aria-labelledby="skill-heading">
             <div class="container">
                 <div class="section-header">
@@ -85,7 +82,7 @@
                         <!-- Web Development -->
                         <div class="skill-card">
                             <div class="skill-image">
-                                <img src="https://images.unsplash.com/photo-1627398242454-45a1465c2479?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Web Development" loading="lazy">
+                                <img src="https://images.unsplash.com/photo-1627398242454-45a1465c2479?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Web Development" loading="lazy" width="400" height="200">
                             </div>
                             <div class="skill-content">
                                 <div class="skill-title">
@@ -104,7 +101,7 @@
                         <!-- Fast Learning -->
                         <div class="skill-card">
                             <div class="skill-image">
-                                <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Fast Learning" loading="lazy">
+                                <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Fast Learning" loading="lazy" width="400" height="200">
                             </div>
                             <div class="skill-content">
                                 <div class="skill-title">
@@ -122,7 +119,7 @@
                         <!-- Graphic Design -->
                         <div class="skill-card">
                             <div class="skill-image">
-                                <img src="designSkill.png" alt="Graphic Design" loading="lazy">
+                                <img src="designSkill.png" alt="Graphic Design" loading="lazy" width="400" height="200">
                             </div>
                             <div class="skill-content">
                                 <div class="skill-title">
@@ -141,7 +138,7 @@
                         <!-- Python -->
                         <div class="skill-card">
                             <div class="skill-image">
-                                <img src="https://cdn.activestate.com/wp-content/uploads/2021/12/python-coding-mistakes.jpg" alt="Python Programming" loading="lazy">
+                                <img src="https://cdn.activestate.com/wp-content/uploads/2021/12/python-coding-mistakes.jpg" alt="Python Programming" loading="lazy" width="400" height="200">
                             </div>
                             <div class="skill-content">
                                 <div class="skill-title">
@@ -159,7 +156,7 @@
                         <!-- Music -->
                         <div class="skill-card">
                             <div class="skill-image">
-                                <img src="DIMENSI BAND.JPG" alt="Music and Audio" loading="lazy">
+                                <img src="DIMENSI BAND.JPG" alt="Music and Audio" loading="lazy" width="400" height="200">
                             </div>
                             <div class="skill-content">
                                 <div class="skill-title">
@@ -178,7 +175,7 @@
                         <!-- Organization & Leadership -->
                         <div class="skill-card">
                             <div class="skill-image">
-                                <img src="organization.jpg" alt="Organization and Leadership" loading="lazy">
+                                <img src="organization.jpg" alt="Organization and Leadership" loading="lazy" width="400" height="200">
                             </div>
                             <div class="skill-content">
                                 <div class="skill-title">
@@ -197,7 +194,7 @@
                         <!-- AI Productivity -->
                         <div class="skill-card">
                             <div class="skill-image">
-                                <img src="https://i.pinimg.com/736x/04/a1/02/04a102349d3be5020cd8d0857f142cb8.jpg" alt="AI Productivity" loading="lazy">
+                                <img src="https://i.pinimg.com/736x/04/a1/02/04a102349d3be5020cd8d0857f142cb8.jpg" alt="AI Productivity" loading="lazy" width="400" height="200">
                             </div>
                             <div class="skill-content">
                                 <div class="skill-title">
@@ -217,10 +214,7 @@
             </div>
         </section>
 
-<!-- ================================================= ~~~~~~~~~~~~~~~ ================================================= -->
-<!-- ================================================= PROJECT SECTION ================================================= -->
-<!-- ================================================= ~~~~~~~~~~~~~~~ ================================================= -->
-
+        <!-- PROJECT SECTION -->
         <section id="project" class="projects-section" style="display: none;" aria-labelledby="project-heading">
             <div class="container">
                 <div class="section-header">
@@ -235,7 +229,7 @@
                         <!-- Client Review Project -->
                         <div class="project-card">
                             <div class="project-image">
-                                <img src="review.png" alt="5-star client review screenshot" loading="lazy">
+                                <img src="review.png" alt="5-star client review screenshot" loading="lazy" width="400" height="200">
                             </div>
                             <div class="project-content">
                                 <div class="project-title">
@@ -256,7 +250,7 @@
                         <!-- Second Review Project -->
                         <div class="project-card">
                             <div class="project-image">
-                                <img src="projek1.png" alt="5-star client review screenshot" loading="lazy">
+                                <img src="projek1.png" alt="5-star client review screenshot" loading="lazy" width="400" height="200">
                             </div>
                             <div class="project-content">
                                 <div class="project-title">
@@ -279,34 +273,15 @@
         </section>
     </main>
 
-<!-- ================================================= ~~~~~~ ================================================= -->
-<!-- ================================================= FOOTER ================================================= -->
-<!-- ================================================= ~~~~~~ ================================================= -->
-
+    <!-- ================================================= FOOTER ================================================= -->
     <footer role="contentinfo">
         <a href="https://www.instagram.com/ramadhani.frqn" aria-label="Instagram @ramadhani.frqn">
-            <!-- Logo PNG Anda -->
-            <img src="insta.png" alt="Instagram Logo" class="insta-logo">
-            <!-- Teks Anda -->
+            <img src="insta.png" alt="Instagram Logo" class="insta-logo" loading="lazy" width="24" height="24">
             <span class="text">@ramadhani.frqn</span>
         </a>
     </footer>
     
+    <!-- JavaScript -->
     <script src="script.js"></script>
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        if (window.innerWidth <= 768) {
-        document.querySelectorAll('.hide-mobile').forEach(btn => {
-            btn.style.display = 'none';
-        });
-        }
-
-        window.addEventListener('resize', () => {
-        document.querySelectorAll('.hide-mobile').forEach(btn => {
-            btn.style.display = (window.innerWidth <= 768) ? 'none' : 'inline-block';
-        });
-        });
-    });
-    </script>
 </body>
 </html>
