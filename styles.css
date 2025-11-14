@@ -366,7 +366,7 @@ nav {
 .skills-grid,
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(500px, 2fr));
     gap: 30px;
     margin-top: var(--spacing-lg);
     contain: layout style;
