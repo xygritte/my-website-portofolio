@@ -363,10 +363,17 @@ nav {
 }
 
 /* Optimized Skills and Projects Grid dengan contain property */
-.skills-grid,
-.projects-grid {
+.skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 2fr));
+    gap: 30px;
+    margin-top: var(--spacing-lg);
+    contain: layout style;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 2fr));
     gap: 30px;
     margin-top: var(--spacing-lg);
     contain: layout style;
